@@ -19,15 +19,20 @@
       const canvas = document.querySelector("#draw");
       const ctx = canvas.getContext("2d");
 
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight - 80;
 
 
-      ctx.strokeStyle = "#BADA55";
-      ctx.lineJoin = "round";
-      ctx.lineCap = "round";
-      ctx.lineWidth = 50;
-      ctx.globalCompositeOperation = "difference";
+      function setup() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight - 80;
+
+        ctx.strokeStyle = "#BADA55";
+        ctx.lineJoin = "round";
+        ctx.lineCap = "round";
+        ctx.lineWidth = 50;
+        ctx.globalCompositeOperation = "difference";
+      }
+
+
 
       let isDrawing = false;
       let lastX = 0;
@@ -68,7 +73,12 @@
         setInterval(function () {
           changeHue();
         }, 20);
+        setup();
       };
+
+      window.resize = () => {
+        setup();
+      }
 
       canvas.addEventListener("mousedown", e => {
         isDrawing = true;
@@ -140,6 +150,58 @@
 
       .reset-button:active {
         color: tomato;
+      }
+
+      @media screen and (max-width: 1150px) {
+        .instruct-txt {
+          font-size: 1.5rem;
+        }
+
+        .reset-button {
+          font-size: 0.8rem;
+        }
+      }
+
+      @media screen and (max-width: 980px) {
+        .instruct-txt {
+          font-size: 1.2rem;
+        }
+
+        .reset-button {
+          font-size: 0.7rem;
+          padding: 7px;
+        }
+      }
+
+      @media screen and (max-width: 790px) {
+        .instruct-txt {
+          font-size: 1rem;
+        }
+      }
+
+      @media screen and (max-width: 670px) {
+        .instruct-txt {
+          font-size: 0.8rem;
+        }
+
+        .reset-button {
+          font-size: 0.5rem;
+        }
+      }
+
+      @media screen and (max-width: 570px) {
+        .instructions {
+          height: 80px;
+        }
+
+        .instruct-txt {
+          font-size: 0.6rem;
+        }
+
+        .reset-button {
+          top: 7%;
+          right: 40%;
+        }
       }
 
       @keyframes typing {
