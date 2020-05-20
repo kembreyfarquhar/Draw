@@ -19,8 +19,6 @@
       const canvas = document.querySelector("#draw");
       const ctx = canvas.getContext("2d");
 
-
-
       function setup() {
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight - 80;
@@ -31,8 +29,6 @@
         ctx.lineWidth = 50;
         ctx.globalCompositeOperation = "difference";
       }
-
-
 
       let isDrawing = false;
       let lastX = 0;
@@ -78,22 +74,25 @@
 
       window.onresize = () => {
         setup();
-      }
+      };
 
-      canvas.addEventListener("mousedown", e => {
+      canvas.addEventListener("mousedown", (e) => {
         isDrawing = true;
         [lastX, lastY] = [e.offsetX, e.offsetY];
       });
-
       canvas.addEventListener("mousemove", draw);
-
       canvas.addEventListener("mouseup", () => (isDrawing = false));
 
+      canvas.addEventListener("touchstart", (e) => {
+        isDrawing = true;
+        [lastX, lastY] = [e.offsetX, e.offsetY];
+      });
+      canvas.addEventListener("touchmove", draw);
+      canvas.addEventListener("touchend", () => (isDrawing = false));
+
       function resetDrawing() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height)
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
       }
-
-
     </script>
 
     <style>
@@ -125,8 +124,8 @@
         overflow: hidden;
         white-space: nowrap;
         margin-top: 10px;
-        letter-spacing: .15em;
-        animation: typing 5.5s steps(40, end)
+        letter-spacing: 0.15em;
+        animation: typing 5.5s steps(40, end);
       }
 
       .reset-button {
@@ -206,11 +205,11 @@
 
       @keyframes typing {
         from {
-          width: 0
+          width: 0;
         }
 
         to {
-          width: 100%
+          width: 100%;
         }
       }
     </style>
